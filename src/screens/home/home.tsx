@@ -175,7 +175,6 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
     header: {
-        flex: 1,
         alignItems: 'center',
         flexDirection: 'row',
         paddingBottom: 20,

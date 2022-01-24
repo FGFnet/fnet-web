@@ -6,8 +6,8 @@ const screenSize = Dimensions.get('screen')
 export const basicStyles = StyleSheet.create({
     container: {
         margin: '10%',
-        flex: 1,
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        flex: 1
     },
     contentText: {
         marginBottom: 8,
@@ -18,7 +18,6 @@ export const basicStyles = StyleSheet.create({
     },
     insideRowContainer: {
         flexDirection: 'row',
-        padding: '5%',
         alignItems: 'center',
         justifyContent: 'center'
     },

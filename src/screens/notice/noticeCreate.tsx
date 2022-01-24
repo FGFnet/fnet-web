@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: 20,
+        width: '100%',
     },
     content: {
         width: '100%',

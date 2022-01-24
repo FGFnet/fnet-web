@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        absolute: 'static',
+        position: 'absolute',
         bottom: 0
     },
     commentInputForm: {
