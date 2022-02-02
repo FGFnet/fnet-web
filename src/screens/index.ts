@@ -1,9 +1,0 @@
-export {default as HomeScreen} from './home';
-export {default as ChatScreen} from './chat';
-export {NoticeScreen, NoticeDetailScreen, NoticeCreateScreen} from './notice';
-export {default as RegisterListScreen} from './registerList';
-export {default as RegisterScreen} from './register';
-export {SettingScreen, FGListScreen, FreshmenListScreen} from './adminSetting'
-export {default as LoginScreen} from './login';
-export {default as LCSettingScreen} from './lcSetting'
-export {default as LCListScreen} from './lcList';
