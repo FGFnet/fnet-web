@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity, Text } from 'react-native';
-import { Header, InputForm, PaperTable } from '../../components';
+import { Header, Table } from '../../components';
 import { Colors } from '../../constants';
-import Icon from 'react-native-vector-icons/Ionicons';
 import * as DocumentPicker from 'expo-document-picker';
 import api from '../../utils/api';
 
 export default function FGListScreen() {
-    const tableHeader= {'#': 'index', '이름': 'name', '학번': 'student_id', 'admin': 'is_admin'}
+    const tableHeader= {'index': '#', 'name': '이름', 'student_id': '학번', 'is_admin': 'admin'}
     const [tableData, updateTableData] = React.useState([])
     const [loading, setLoading] = useState(false)
-    const [searchQuery, setSearchQuery] = React.useState('')
     const [singleFile, setSingleFile] = useState(null);
 
     const fetchUsers = async () => {
@@ -65,45 +63,13 @@ export default function FGListScreen() {
         fetchUsers()
     }, [])
 
-    const onChangeSearch = (query) => {
-        setSearchQuery(query)
-    }
-
-    async function onSubmit () { // search by fg name
-        try {
-            setLoading(true)
-            const res = await api.searchFG(searchQuery)
-            updateTableData(res.data.data)
-        } catch (err) {
-            alert(err)
-        }
-        setLoading(false)
-    }
-
     return(
         <ScrollView>
             <View style={styles.header}>
                 <Header title='FG List' marginBottom={0}/>
-                <View style={styles.searchBar}>
-                    <InputForm
-                        style={{width: '80%'}}
-                        height={35}
-                        value={searchQuery}
-                        onChangeText={onChangeSearch}
-                        multiline={false}
-                        onSubmitEditing={onSubmit}
-                        placeholder='이름'
-                    />
-                    <Icon
-                        style={styles.inputIcon}
-                        name="search-outline"
-                        color={Colors.light}
-                        size={18}
-                    />
-                </View>
             </View>
 
-            <PaperTable
+            <Table
                 header={tableHeader}
                 data={tableData}
                 loading={loading}
@@ -134,20 +100,9 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 30,
         paddingTop: '10%',
         paddingRight: '10%',
         paddingLeft: '10%'
-    },
-    searchBar: {
-        flex: 1,
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'flex-end'
-    },
-    inputIcon: {
-        position: 'absolute',
-        paddingRight: 10
     },
     textStyle: {
         backgroundColor: '#fff',

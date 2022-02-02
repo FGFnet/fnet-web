@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Header, InputForm, PaperTable } from '../../components';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import { Header, Table } from '../../components';
 import {basicStyles} from '../../components/basic_styles'
 import { Colors } from '../../constants';
 import api from '../../utils/api';
 
 export default function RegisterScreen() {
-    const checkboxKey = 'register'
     const [tableData, updateTableData] = React.useState([])
     const [searchQuery, setSearchQuery] = React.useState('')
     const [loading, setLoading] = useState(false);
@@ -27,11 +25,11 @@ export default function RegisterScreen() {
         fetchUsers();
     }, []);
 
-    const tableHeader = {'#': 'index',
-                        '이름': 'name',
-                        '전화번호': 'phone_number',
-                        'LC': 'lc',
-                        '접수': 'register'}
+    const tableHeader = {'index': '#',
+                        'name': '이름',
+                        'phone_number': '전화번호',
+                        'lc': 'LC',
+                        'register': '접수'}
 
     const onChangeSearch = (query) => {
         setSearchQuery(query)
@@ -66,30 +64,12 @@ export default function RegisterScreen() {
             <View style={basicStyles.container}>
                 <View style={styles.header}>
                     <Header title='접수' marginBottom={0}/>
-                    <View style={styles.searchBar}>
-                        <InputForm
-                            style={{width: '80%'}}
-                            height={35}
-                            value={searchQuery}
-                            onChangeText={onChangeSearch}
-                            multiline={false}
-                            onSubmitEditing={onSubmit}
-                            placeholder='이름'
-                        />
-                        <Icon
-                            style={styles.inputIcon}
-                            name="search-outline"
-                            color={Colors.light}
-                            size={18}
-                        />
-                    </View>
                 </View>
 
                 <View style={{width: '100%'}}>
-                    <PaperTable
+                    <Table
                         header={tableHeader}
                         data={tableData}
-                        checkboxKey={checkboxKey}
                         toggleFunc={Register}
                         loading={loading}
                     />
@@ -103,16 +83,5 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 30
-    },
-    searchBar: {
-        flex: 1,
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'flex-end'
-    },
-    inputIcon: {
-        position: 'absolute',
-        paddingRight: 10
     },
 });

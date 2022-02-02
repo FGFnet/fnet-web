@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, ScrollView, ImageBackground} from 'react-native';
 import {Text} from 'react-native-paper';
-import { basicStyles, Header, PaperTable, StyledDivider } from '../../components';
+import { basicStyles, Header, PaperTable, StyledDivider, Table } from '../../components';
 import api from '../../utils/api'
 
 export default function RegisterListScreen({route}) {
@@ -11,10 +11,10 @@ export default function RegisterListScreen({route}) {
     const [lcMemberList, setLCMemberList] = useState([])
     const [totalRegister, setTotalRegister] = useState(0)
 
-    const tableHeader = {'#': 'index',
-                        '이름': 'name',
-                        '계열': 'department',
-                        '접수': 'register'}
+    const tableHeader = {'index': '#',
+                        'name': '이름',
+                        'department': '계열',
+                        'register': '접수'}
 
     async function updateLCMemberList() {
         var total = 0
@@ -63,10 +63,9 @@ export default function RegisterListScreen({route}) {
                     </View>
                 </View>
                 <StyledDivider/>
-                <PaperTable
-                    header={tableHeader}
-                    data={lcMemberList}
-                />
+                <View style={{width: '100%'}}>
+                    <Table header={tableHeader} data={lcMemberList}/>
+                    </View>
             </View>
         </ScrollView>
     )

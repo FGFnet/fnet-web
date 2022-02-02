@@ -8,20 +8,20 @@ import {
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import {Colors} from '../constants';
 
-const fontConfig = {
-  regular: {
-    fontFamily: 'NanumSquareRoundB',
-  },
-  medium: {
-    fontFamily: 'NanumSquareRoundL',
-  },
-  light: {
-    fontFamily: 'NanumSquareRoundL',
-  },
-  thin: {
-    fontFamily: 'NanumSquareRoundL',
-  }
-}
+// const fontConfig = {
+//   regular: {
+//     fontFamily: 'NanumSquareRoundB',
+//   },
+//   medium: {
+//     fontFamily: 'NanumSquareRoundL',
+//   },
+//   light: {
+//     fontFamily: 'NanumSquareRoundL',
+//   },
+//   thin: {
+//     fontFamily: 'NanumSquareRoundL',
+//   }
+// }
 
 const theme = {
   ...DefaultTheme,
@@ -33,7 +33,7 @@ const theme = {
     text: Colors.darker,
     placeHolder: Colors.light
   },
-  fonts: fontConfig
+  // fonts: fontConfig
 };
 
 export function PaperProvider({children}: {children: React.ReactNode}) {

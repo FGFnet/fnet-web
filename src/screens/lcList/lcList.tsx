@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text } from 'react-native-paper';
-import { InputForm, Header, PaperTable, basicStyles } from '../../components';
-import { Colors } from '../../constants';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Header, Table, basicStyles } from '../../components';
 import api from '../../utils/api';
 
 export default function LCListScreen({route}) {
-  const tableHeader= {'#': 'index', '이름': 'name', '계열': 'department'}
+  const tableHeader= {'index': '#', 'name': '이름', 'department': '계열'}
   const [tableData, updateTableData] = React.useState([])
   const [loading, setLoading] = useState(false)
   const [searchData, setSearchData] = React.useState([])
@@ -48,24 +45,10 @@ export default function LCListScreen({route}) {
           <View style={basicStyles.container}>
             <View style={styles.header}>
                 <Header title={lcName.toUpperCase() + ' Members'} marginBottom={0}/>
-                <View style={styles.searchBar}>
-                    <InputForm
-                        style={{width: '80%'}}
-                        height={35}
-                        value={searchQuery}
-                        onChangeText={onChangeSearch}
-                    />
-                    <Icon
-                        style={styles.inputIcon}
-                        name="search-outline"
-                        color={Colors.light}
-                        size={18}
-                    />
-                </View>
             </View>
 
             <View style={{width: '100%'}}>
-                <PaperTable
+                <Table
                     header={tableHeader}
                     data={tableData}
                     loading={loading}
@@ -80,16 +63,5 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 30,
-    },
-    searchBar: {
-        flex: 1,
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'flex-end'
-    },
-    inputIcon: {
-        position: 'absolute',
-        paddingRight: 10
     },
 });

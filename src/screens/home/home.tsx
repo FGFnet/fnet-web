@@ -202,7 +202,6 @@ const styles = StyleSheet.create({
     button: {
         flex: 1,
         flexDirection: 'column',
-        height: 80,
         width: 150,
         alignItems: 'center',
     },
