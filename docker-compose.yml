@@ -12,7 +12,7 @@ services:
       - MYSQL_USER=fnet
       - MYSQL_PASSWORD=fnet
   
-  fnet-api:
+  fnet:
     image: coc0a25/fnet:webapp
     container_name: fnet
     restart: always
@@ -24,6 +24,8 @@ services:
       - MYSQL_DATABASE=fnet
       - MYSQL_USER=fnet
       - MYSQL_PASSWORD=fnet
+      - DJANGO_SUPERUSER_NAME=root
+      - DJANGO_SUPERUSER_PASSWORD=rootroot
     ports:
       - "0.0.0.0:40000:8000" # for development
       # - "0.0.0.0:80:8000" # for production
