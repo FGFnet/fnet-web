@@ -16,10 +16,10 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('freshman.urls')),
-    path('', include('notice.urls.user')),
-    path('admin/', include('notice.urls.admin')),
-    path('', include("fg.urls.user")),
-    path('admin/', include("fg.urls.admin")),
-    path('', include('lc.urls')),
+    path('api/', include('freshman.urls')),
+    path('api/', include('notice.urls.user')),
+    path('api/admin/', include('notice.urls.admin')),
+    path('api/', include("fg.urls.user")),
+    path('api/admin/', include("fg.urls.admin")),
+    path('api/', include('lc.urls')),
 ]

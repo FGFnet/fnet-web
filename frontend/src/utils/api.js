@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = '/api' //'http://ec2-13-124-80-175.ap-northeast-2.compute.amazonaws.com'
+axios.defaults.baseURL = '/api'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.withCredentials = true
