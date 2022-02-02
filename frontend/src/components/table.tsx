@@ -146,6 +146,15 @@ export default function Table(props) {
                 Header: header[key], accessor: key,
                 Cell: (row) => { let idx: number = row.row.id; ++idx; return <div>{idx}</div>; }
             })
+        } else if (key === 'is_admin') {
+              tableHeader.push({
+                Header: header[key], accessor: key,
+                Cell: (row) => { 
+                  console.log(row)
+                  if(row.data[row.row.index].is_admin) return <div>O</div>; 
+                  else return <div>X</div>;
+                }
+            })
         } else if (key === 'register') {
             tableHeader.push({
                 Header: header[key], accessor: key,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, ScrollView, ImageBackground} from 'react-native';
 import {Text} from 'react-native-paper';
-import { basicStyles, Header, PaperTable, StyledDivider, Table } from '../../components';
+import { basicStyles, Header, StyledDivider, Table } from '../../components';
 import api from '../../utils/api'
 
 export default function RegisterListScreen({route}) {
@@ -14,7 +14,7 @@ export default function RegisterListScreen({route}) {
     const tableHeader = {'index': '#',
                         'name': '이름',
                         'department': '계열',
-                        'register': '접수'}
+                        'register_show': '접수'}
 
     async function updateLCMemberList() {
         var total = 0
