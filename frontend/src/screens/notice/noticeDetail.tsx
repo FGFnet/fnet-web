@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
-import { Text, Checkbox, IconButton } from 'react-native-paper';
+import { Text, IconButton } from 'react-native-paper';
 import { Menu, MenuItem } from 'react-native-material-menu';
 import { basicStyles, InputForm, GreenButton, StyledDivider } from '../../components';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../../constants';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import api from '../../utils/api'
 import { useNavigation } from '../../providers'
@@ -162,15 +163,14 @@ export default function NoticeDetailScreen({route}) {
                     </View>
                     <View style={styles.commentContent}>
                         <Text style={basicStyles.contentText}>{comment.content}</Text>
-                        <Checkbox
-                            status={comment.check ? 'checked' : 'unchecked'}
+                        { !!loggedUser.is_admin && 
+                            <BouncyCheckbox
+                            isChecked={comment.check}
                             onPress={async () => {
                                 await changeStatus(comment)
                             }}
-                            uncheckedColor={Colors.light}
-                            color={Colors.primary}
-                            disabled={!!!loggedUser.is_admin}
-                        />
+                            fillColor={Colors.primary_lighter}
+                        /> }
                     </View>
                 </View>
             )

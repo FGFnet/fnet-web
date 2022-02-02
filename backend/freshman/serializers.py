@@ -20,7 +20,7 @@ class FreshmanSerializer(serializers.ModelSerializer):
 class FreshmanTableDataSerializer(serializers.ModelSerializer):
     phone_number = serializers.SerializerMethodField()
     lc = serializers.SerializerMethodField()
-    register = serializers.SerializerMethodField()
+    register_show = serializers.SerializerMethodField()
     class Meta:
         model = Freshman
         fields = '__all__'
@@ -31,7 +31,7 @@ class FreshmanTableDataSerializer(serializers.ModelSerializer):
     def get_lc(self, obj):
         return obj.lc.name
     
-    def get_register(self, obj):
+    def get_register_show(self, obj):
         if obj.register:
             return 'O'
         else:
