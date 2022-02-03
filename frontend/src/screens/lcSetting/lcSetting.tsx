@@ -46,7 +46,7 @@ export default function LCSettingScreen() {
     async function updateLC (name, schedule) {
         const data = {
             name: name,
-            schedule: schedule
+            schedule: schedule.getFullYear() + "-" + (schedule.getMonth()+1) + "-" + schedule.getDate()
         }
         try {
             const res = await api.updateLC(data)
