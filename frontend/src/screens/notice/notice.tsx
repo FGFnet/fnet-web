@@ -71,7 +71,7 @@ export default function NoticeScreen() {
         <View style={basicStyles.container}>
             <View style={styles.header}>
                 <Header title='공지사항'/>
-                { loggedUser.is_admin && <GreenButton text='+new' press={navigate}/> }
+                { loggedUser.is_admin && <GreenButton text='+new' press={navigate} align='flex-end'/> }
             </View>
             <FlatList
                 ListEmptyComponent={

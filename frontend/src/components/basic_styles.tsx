@@ -17,6 +17,7 @@ export const basicStyles = StyleSheet.create({
         width: '100%'
     },
     insideRowContainer: {
+        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'

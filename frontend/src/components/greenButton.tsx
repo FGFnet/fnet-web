@@ -1,23 +1,30 @@
 import React from 'react';
 import {Colors} from '../constants';
-import { withTheme, Button } from 'react-native-paper';
-import {View} from 'react-native';
+import { withTheme } from 'react-native-paper';
+import {Text, TouchableOpacity} from 'react-native';
 
 function GreenButton(props) {
+    const align = props.align
     return(
-        <View style = {props.viewStyle}>
-            <Button
-                labelStyle={{
+        <TouchableOpacity
+            onPress={props.press}
+            style={{
+                margin: 10,
+                alignItems: align,
+                flex: 1,
+                width: '100%'
+            }}
+        >
+            <Text
+                style={{
                     color: Colors.darker,
                     backgroundColor: Colors.primary_lighter,
                     fontWeight: 'bold',
                     paddingLeft: 5,
                     paddingRight: 14
                 }}
-                onPress={props.press}
-                uppercase={false}
-            > {props.text} </Button>
-        </View>
+            >{props.text}</Text>
+        </TouchableOpacity>
     );
 }
 

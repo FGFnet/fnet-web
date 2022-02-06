@@ -74,6 +74,7 @@ export default function HomeScreen() {
             <GreenButton
                 text={lc.name}
                 press={() => navigation.navigate('LCList',{lcName: lc.name})}
+                align= 'flex-end'
             />
         </View>
     )
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     schedule:{
+        width: '80%',
         flexDirection: 'row',
         alignItems: 'center'
     }

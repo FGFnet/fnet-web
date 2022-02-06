@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {Text, Modal, Portal} from 'react-native-paper';
 import { basicStyles, GreenButton, Header, InputForm } from '../../components';
 import DatePicker from '@dietime/react-native-date-picker';
@@ -95,25 +95,21 @@ export default function LCSettingScreen() {
                         value={firstLC}
                         onChangeText={text=>setFirstLC(text)}
                     />
-                    <TouchableOpacity onPress={()=>showDatePicker('1')}>
+                    <TouchableOpacity style={{width: '40%'}} onPress={()=>showDatePicker('1')}>
                         <InputForm
                             placeholder='날짜'
                             editable={false}
                             value={firstDate ? new Date(firstDate.getTime() - (firstDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10) : null}
                             height={40}
                             pointerEvents="none"
-                            style={{width: 120}}
+                            style={{width: '100%'}}
                         />
                     </TouchableOpacity>
                 </View>
                 <GreenButton
-                    text='저장' 
-                    viewStyle={{
-                        width:'100%', 
-                        flex: 1, 
-                        alignItems: 'flex-end'
-                    }}
+                    text='저장'
                     press={()=>updateLC(firstLC, firstDate)}
+                    align= 'flex-end'
                 />
 
                 <View style={basicStyles.insideRowContainer}>
@@ -126,24 +122,20 @@ export default function LCSettingScreen() {
                         value={secondLC}
                         onChangeText={text=>setSecondLC(text)}
                     />
-                    <TouchableOpacity onPress={()=>showDatePicker('2')}>
+                    <TouchableOpacity style={{width: '40%'}} onPress={()=>showDatePicker('2')}>
                         <InputForm
                             placeholder='날짜'
                             editable={false}
                             value={secondDate ? new Date(secondDate.getTime() - (secondDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10) : null}
                             height={40}
                             pointerEvents="none"
-                            style={{width: 120}}
+                            style={{width: '100%',}}
                         />
                     </TouchableOpacity>
                 </View>
                 <GreenButton
                     text='저장' 
-                    viewStyle={{
-                        width:'100%', 
-                        flex: 1, 
-                        alignItems: 'flex-end'
-                    }}
+                    align= 'flex-end'
                     press={() => updateLC(secondLC, secondDate)}
                 />
 
@@ -157,14 +149,14 @@ export default function LCSettingScreen() {
                         value={thirdLC}
                         onChangeText={text=>setThirdLC(text)}
                     />
-                    <TouchableOpacity onPress={()=>showDatePicker('3')}>
+                    <TouchableOpacity style={{width: '40%'}} onPress={()=>showDatePicker('3')}>
                         <InputForm
                             placeholder='날짜'
                             editable={false}
                             value={thirdDate ? new Date(thirdDate.getTime() - (thirdDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10) : ""}
                             height={40}
                             pointerEvents="none"
-                            style={{width: 120}}
+                            style={{width: '100%',}}
                         />
                     </TouchableOpacity>
                     <Portal>
@@ -183,12 +175,9 @@ export default function LCSettingScreen() {
                     </Portal>
                 </View>
                 <GreenButton
-                    text='저장' 
-                    viewStyle={{
-                        width:'100%', 
-                        flex: 1, 
-                        alignItems: 'flex-end'
-                    }}
+                    text='저장'
+                    align= 'flex-end' 
+                    width= '100%'
                     press={() => updateLC(thirdLC, thirdDate)}
                 />
             </View>

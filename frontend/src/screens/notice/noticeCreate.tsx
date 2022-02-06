@@ -78,12 +78,7 @@ export default function NoticeCreateScreen({route}) {
                 <GreenButton
                     text='등록'
                     press={submitNotice}
-                    viewStyle={{
-                        paddingTop: 30,
-                        width:'100%',
-                        flex: 1,
-                        alignItems: 'flex-end'
-                    }}
+                    align= 'flex-end'
                 />
             </View>
         </ScrollView>

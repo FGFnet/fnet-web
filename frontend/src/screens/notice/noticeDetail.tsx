@@ -227,6 +227,7 @@ export default function NoticeDetailScreen({route}) {
                     <GreenButton
                         text='입력'
                         press={createComment}
+                        align='flex-end'
                     />
                 </View>
             </View>
@@ -272,7 +273,8 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     commentInputForm: {
-        width: '75%',
+        margin: 0,
+        width: '70%'
     },
     time: {
         color: Colors.light
