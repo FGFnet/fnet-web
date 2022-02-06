@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Text, Button, Divider, ActivityIndicator } from 'react-native-paper';
 import { Colors } from '../../constants';
 import { basicStyles, GreenButton, Header } from '../../components';
@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import type { AppState, User } from '../../store';
 import api from '../../utils/api'
 import { useFocusEffect } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function HomeScreen() {
     const navigation = useNavigation();
@@ -112,47 +113,60 @@ export default function HomeScreen() {
             </View>
             <Divider/>
             <View style={styles.body}>
-                <Button icon="people-outline"
-                    contentStyle={styles.button}
-                    labelStyle={{fontSize: 30}}
+                <Pressable
                     onPress={() => {
                         navigation.navigate('RegisterList', {name: lc});
                     }}
+                    style = {({pressed}) => [
+                        {
+                            backgroundColor: pressed? Colors.primary_lighter : Colors.white
+                        }, styles.button
+                    ]}
                 >
-                    <Text style={{fontSize: 14, color: Colors.primary}}>{lc}</Text>
-                </Button>
-                <Button
-                    icon="chatbubbles-outline"
-                    contentStyle={styles.button}
-                    labelStyle={{fontSize: 30}}
+                    <Icon name="people-outline" size={35} color={Colors.primary} />
+                    <Text style={{fontSize: 14, color: Colors.primary, marginTop: 10}}>{lc}</Text>
+                </Pressable>
+                <Pressable
                     onPress={() => {
                         alert('개발 중입니다!');
                     }}
+                    style = {({pressed}) => [
+                        {
+                            backgroundColor: pressed? Colors.primary_lighter : Colors.white
+                        }, styles.button
+                    ]}
                 >
-                    <Text style={{fontSize: 14, color: Colors.primary}}>Chat</Text>
-                </Button>
+                    <Icon name="chatbubbles-outline" size={35} color={Colors.primary} />
+                    <Text style={{fontSize: 14, color: Colors.primary, marginTop: 10}}>Chat</Text>
+                </Pressable>
             </View>
             <View style={styles.body}>
-                <Button
-                    icon="md-document-text-outline"
-                    contentStyle={styles.button}
-                    labelStyle={{fontSize: 30}}
+                <Pressable
                     onPress={() => {
                         navigation.navigate('Notice', {});
                     }}
+                    style = {({pressed}) => [
+                        {
+                            backgroundColor: pressed? Colors.primary_lighter : Colors.white
+                        }, styles.button
+                    ]}
                 >
-                    <Text style={{fontSize: 14, color: Colors.primary}}>Notice</Text>
-                </Button>
-                <Button
-                    icon="folder-open-outline"
-                    contentStyle={styles.button}
-                    labelStyle={{fontSize: 30}}
+                    <Icon name="md-document-text-outline" size={35} color={Colors.primary} />
+                    <Text style={{fontSize: 14, color: Colors.primary, marginTop: 10}}>Notice</Text>
+                </Pressable>
+                <Pressable
                     onPress={() => {
                         loggedUser.is_admin ? navigation.navigate('Register', {}) : alert("접근권한이 없습니다. :<")
                     }}
+                    style = {({pressed}) => [
+                        {
+                            backgroundColor: pressed? Colors.primary_lighter : Colors.white
+                        }, styles.button
+                    ]}
                 >
-                    <Text style={{fontSize: 14, color: Colors.primary}}>Register</Text>
-                </Button>
+                    <Icon name="folder-open-outline" size={35} color={Colors.primary} />
+                    <Text style={{fontSize: 14, color: Colors.primary, marginTop: 10}}>Register</Text>
+                </Pressable>
             </View>
             <Divider/>
 
@@ -194,7 +208,6 @@ const styles = StyleSheet.create({
     },
     body: {
         padding: 40,
-        paddingBottom: 40,
         flex: 2,
         flexDirection: 'row',
         alignItems: 'center',
