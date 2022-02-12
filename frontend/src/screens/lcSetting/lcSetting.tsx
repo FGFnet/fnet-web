@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {Text, Modal, Portal} from 'react-native-paper';
 import { basicStyles, GreenButton, Header, InputForm } from '../../components';
-import DatePicker from '@dietime/react-native-date-picker';
 import api from '../../utils/api'
+import { DatePickerModal } from 'react-native-paper-dates'
 
 export default function LCSettingScreen() {
     const [selectDay, setSelectDay] = useState("")
@@ -14,39 +14,54 @@ export default function LCSettingScreen() {
     const [firstLC, setFirstLC] = useState("");
     const [secondLC, setSecondLC] = useState("");
     const [thirdLC, setThirdLC] = useState("");
+    const [dates, setDates] = useState<Date[] | undefined>();
 
     const [visible, setVisible] = React.useState(false);
 
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
-    const containerStyle = {backgroundColor: 'white', padding: 20};
 
     const showDatePicker = (selectDay) => {
         setSelectDay(selectDay);
         showModal()
     };
 
-    const onChangeDate = (selectedDate) => {
-        const currentDate = selectedDate;
-        selectDay === "1" ? setFirstDate(currentDate) :
-        selectDay === "2" ? setSecondDate(currentDate) :
-        selectDay === "3" ? setThirdDate(currentDate) : null
-    }
+    const onDismiss = React.useCallback(() => {
+        setVisible(false);
+      }, [setVisible]);
 
+
+    const onConfirm = React.useCallback((params) => {
+        setVisible(false);
+        setDates(params.dates);
+        let first = new Date(params.dates[0]);
+        let second = new Date(params.dates[1]);
+        let third = new Date(params.dates[2]);
+        first.setDate(first.getDate() + 1)
+        second.setDate(second.getDate() + 1)
+        third.setDate(third.getDate() + 1)
+        setFirstDate(first.toISOString().substring(0, 10))
+        setSecondDate(second.toISOString().substring(0, 10))
+        setThirdDate(third.toISOString().substring(0, 10))
+      }, []);
+    
     const getDate = () => {
+        let today = new Date()
+        let date
         if(selectDay === "1"){
-            return firstDate
+            date = firstDate ? new Date(firstDate) : today
         } else if (selectDay === "2") {
-            return secondDate
+            date = secondDate ? new Date(secondDate) : today
         } else {
-            return thirdDate
+            date = thirdDate ? new Date(thirdDate) : today
         }
+        return date
     }
 
     async function updateLC (name, schedule) {
         const data = {
             name: name,
-            schedule: schedule.getFullYear() + "-" + (schedule.getMonth()+1) + "-" + schedule.getDate()
+            schedule: schedule
         }
         try {
             const res = await api.updateLC(data)
@@ -63,15 +78,15 @@ export default function LCSettingScreen() {
             const lcList = res.data.data
             if (lcList[0]) {
                 setFirstLC(lcList[0].name)
-                setFirstDate(new Date(lcList[0].schedule))
+                setFirstDate(lcList[0].schedule)
             } 
             if (lcList[1]){
                 setSecondLC(lcList[1].name)
-                setSecondDate(new Date(lcList[1].schedule))
+                setSecondDate(lcList[1].schedule)
             } 
             if (lcList[2]){
                 setThirdLC(lcList[2].name)
-                setThirdDate(new Date(lcList[2].schedule))
+                setThirdDate(lcList[2].schedule)
             }   
         } catch(err) {
         }
@@ -99,7 +114,7 @@ export default function LCSettingScreen() {
                         <InputForm
                             placeholder='날짜'
                             editable={false}
-                            value={firstDate ? new Date(firstDate.getTime() - (firstDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10) : null}
+                            value={firstDate ? firstDate : null}
                             height={40}
                             pointerEvents="none"
                             style={{width: '100%'}}
@@ -126,7 +141,7 @@ export default function LCSettingScreen() {
                         <InputForm
                             placeholder='날짜'
                             editable={false}
-                            value={secondDate ? new Date(secondDate.getTime() - (secondDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10) : null}
+                            value={secondDate ? secondDate : null}
                             height={40}
                             pointerEvents="none"
                             style={{width: '100%',}}
@@ -153,26 +168,21 @@ export default function LCSettingScreen() {
                         <InputForm
                             placeholder='날짜'
                             editable={false}
-                            value={thirdDate ? new Date(thirdDate.getTime() - (thirdDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10) : ""}
+                            value={thirdDate ? thirdDate : ""}
                             height={40}
                             pointerEvents="none"
                             style={{width: '100%',}}
                         />
                     </TouchableOpacity>
-                    <Portal>
-                        <Modal 
-                            visible={visible} 
-                            onDismiss={hideModal} 
-                            contentContainerStyle={containerStyle}
-                        >
-                            <DatePicker
-                                onChange={(value) => onChangeDate(value)}
-                                value={getDate()}
-                                format="yyyy-mm-dd"
-                                startYear={new Date().getFullYear()}
-                            />
-                        </Modal>
-                    </Portal>
+
+                    <DatePickerModal
+                        locale="en"
+                        mode="multiple"
+                        visible={visible}
+                        onDismiss={onDismiss}
+                        date={getDate()}
+                        onConfirm={onConfirm}
+                    />
                 </View>
                 <GreenButton
                     text='저장'
