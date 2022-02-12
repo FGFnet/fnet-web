@@ -104,10 +104,10 @@ export default function HomeScreen() {
                 />
                 <View style={styles.headerFgInfo}>
                     <Text style={styles.headerFgName}>{loggedUser.name} FG</Text>
-                    <Text style={basicStyles.contentText}> {today} 진행 LC {lc}</Text>
+                    <Text style={basicStyles.contentText}> {today} 진행 LC : {lc}</Text>
                     {
                         lc !== '-' &&
-                        <Text>{lc} 접수 인원  {totalRegister}</Text>
+                        <Text>{lc} 접수 인원 : {totalRegister}</Text>
                     }
                 </View>
             </View>

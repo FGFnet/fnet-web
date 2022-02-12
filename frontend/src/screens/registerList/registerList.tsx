@@ -3,6 +3,7 @@ import {View, StyleSheet, ScrollView, ImageBackground} from 'react-native';
 import {Text} from 'react-native-paper';
 import { basicStyles, Header, StyledDivider, Table } from '../../components';
 import api from '../../utils/api'
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function RegisterListScreen({route}) {
     const {name} = route.params
@@ -10,6 +11,8 @@ export default function RegisterListScreen({route}) {
 
     const [lcMemberList, setLCMemberList] = useState([])
     const [totalRegister, setTotalRegister] = useState(0)
+    const [nscRegister, setNscRegister] = useState(0)
+    const [hsscRegister, setHssclRegister] = useState(0)
 
     const tableHeader = {'index': '#',
                         'name': '이름',
@@ -18,13 +21,28 @@ export default function RegisterListScreen({route}) {
 
     async function updateLCMemberList() {
         var total = 0
+        var nsc = 0
+        var hssc = 0
         lcMemberList.forEach((lcMember)=> {
-            if (lcMember.register === 'O') {
+            if (lcMember.register_show === 'O') {
                 total++
+                if (lcMember.department === '자연과학계열' || lcMember.department === '공학계열') {
+                    nsc++
+                } else {
+                    hssc++
+                }
             }
         })
         setTotalRegister(total)
+        setNscRegister(nsc)
+        setHssclRegister(hssc)
     }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getLCMemberList(lcName)
+        },[])
+    )
 
     useEffect(()=>{
         updateLCMemberList()
@@ -37,9 +55,6 @@ export default function RegisterListScreen({route}) {
         } catch(err) {
         }
     }
-    useEffect(()=> {
-        getLCMemberList(lcName)
-    }, [])
 
     return(
         <ScrollView nestedScrollEnabled = {true}>
@@ -58,6 +73,14 @@ export default function RegisterListScreen({route}) {
                             <View style={[styles.registeredNum, {paddingBottom: 5}]}>
                                 <Text style={{fontWeight: 'bold'}}> 전체 접수 인원 </Text>
                                 <Text style={{fontWeight: 'bold'}}> {totalRegister} </Text>
+                            </View>
+                            <View style={[styles.registeredNum, {paddingBottom: 5}]}>
+                                <Text style={{fontSize: 12}}> 인사캠 접수 인원 </Text>
+                                <Text style={{fontSize: 12}}> {hsscRegister} </Text>
+                            </View>
+                            <View style={[styles.registeredNum, {paddingBottom: 5}]}>
+                                <Text style={{fontSize: 12}}> 자과캠 접수 인원 </Text>
+                                <Text style={{fontSize: 12}}> {nscRegister} </Text>
                             </View>
                         </View>
                     </View>

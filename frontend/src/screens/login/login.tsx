@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../../store';
-import { Text, Button, Checkbox } from 'react-native-paper';
+import { Text, Button } from 'react-native-paper';
 import { Colors } from '../../constants'
 import { useNavigation } from '../../providers';
 import api from '../../utils/api';
@@ -10,7 +10,6 @@ import api from '../../utils/api';
 export default function LoginScreen() {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    const [checked, setChecked] = React.useState(false);
     const [name, setName] = React.useState('');
     const [studentId, setStudentId] = React.useState('');
     const [loading, setLoading] = React.useState(false);

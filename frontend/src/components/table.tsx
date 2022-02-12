@@ -165,7 +165,7 @@ export default function Table(props) {
                           style={{paddingRight: 10}}
                           size={18}
                           icon={row.data[row.row.index].register ? 
-                          "heart-outline" : "heart-dislike-outline"}
+                          "heart" : "heart-outline"}
                           onPress={() => props.toggleFunc(row.data[row.row.index].id)}
                         ></IconButton>
                     )
