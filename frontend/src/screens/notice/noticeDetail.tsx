@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import { View, StyleSheet, ScrollView, RefreshControl, Dimensions } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
 import { Menu, MenuItem } from 'react-native-material-menu';
 import { basicStyles, InputForm, GreenButton, StyledDivider } from '../../components';
@@ -12,8 +12,12 @@ import { useNavigation } from '../../providers'
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import type { AppState, User } from '../../store';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 export default function NoticeDetailScreen({route}) {
+    const headerHeight = useHeaderHeight();
+    const windowHeight = Dimensions.get('window').height - headerHeight;
+
     const navigation = useNavigation();
     const loggedUser = useSelector<AppState, User>((state) => state.loggedUser)
 
@@ -178,7 +182,7 @@ export default function NoticeDetailScreen({route}) {
     )
     
     return(
-        <View style={{flex:1}}>
+        <View style={{height: windowHeight}}>
             {
                 loggedUser.is_admin && 
                 <View style={{flexDirection:'row', justifyContent:'flex-end', alignContent: 'center', position: 'absolute', top: 10, right: 10}}>
@@ -265,6 +269,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     commentInput: {
+        backgroundColor: Colors.white,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
