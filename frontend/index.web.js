@@ -9,3 +9,8 @@ AppRegistry.runApplication(appName, {
   initialProps: {},
   rootTag: document.getElementById('app-root'),
 });
+import {
+  en,
+  registerTranslation,
+} from 'react-native-paper-dates'
+registerTranslation('en', en)
