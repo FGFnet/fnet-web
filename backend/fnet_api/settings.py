@@ -19,7 +19,7 @@ if production_env:
 else:
     from .dev_settings import *
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 with open(os.path.join(DATA_DIR, "config", "secret.key"), "r") as f:
     SECRET_KEY = f.read()
