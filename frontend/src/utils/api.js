@@ -4,6 +4,7 @@ axios.defaults.baseURL = '/api'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.withCredentials = true
+axios.defaults.headers.common['X-CSRFToken'] = getCookie("csrftoken");
 
 export default {
   login (data) {

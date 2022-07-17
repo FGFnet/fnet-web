@@ -1,21 +1,12 @@
-from datetime import date
-from django.core.checks.messages import Error
-from django.db.models import query
-from django.db.models.query import QuerySet
-from django.shortcuts import render
-from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from .models import LC
 from .models import FG
 from .serializers import LCSerializer, UpdateLCSerializer
 import dateutil.parser
-import datetime
-from fnet_api.csrf import CSRFExemptAPIView
 
 # Create your views here.
-class LCAPI(CSRFExemptAPIView):
+class LCAPI(APIView):
     def get(self, request):
         user = request.user
         lc_name = request.GET.get("name")

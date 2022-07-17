@@ -29,7 +29,7 @@ class FGAPI(APIView):
         return Response({"error": False, "data": data})
 
 
-class FGLoginAPI(CSRFExemptAPIView):
+class FGLoginAPI(APIView):
     def post(self, request):
         data = request.data
         serializer = FGLoginSerializer(data = data)

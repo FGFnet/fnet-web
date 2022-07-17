@@ -10,7 +10,6 @@ from .serializers import (CreateFreshmanSerializer, EditFreshmanSerializer, Fres
 
 from django.db import transaction, IntegrityError
 from openpyxl import load_workbook
-from fnet_api.csrf import CSRFExemptAPIView
 
 class FreshmanAPI(APIView):
     def get(self, request):
@@ -77,7 +76,7 @@ class FreshmanAPI(APIView):
         return Response({})
     
 
-class FreshmanFileUploadAPI(CSRFExemptAPIView):
+class FreshmanFileUploadAPI(APIView):
     parser_classes = (MultiPartParser,)
 
     # TODO: Add exception handling
@@ -110,7 +109,7 @@ class FreshmanFileUploadAPI(CSRFExemptAPIView):
 
 
 
-class RegisterFreshmanAPI(CSRFExemptAPIView):
+class RegisterFreshmanAPI(APIView):
     def put(self, request):
         data = request.data
         serializer = registerFreshmanSerializer(data=data)

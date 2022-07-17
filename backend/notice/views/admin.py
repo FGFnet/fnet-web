@@ -2,9 +2,8 @@ from ..models import Comment, Notice
 from ..serializers import CommentAdminSerializer, CreateNoticeSerializer, EditNoticeSerializer, NoticeSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from fnet_api.csrf import CSRFExemptAPIView
 
-class NoticeAdminAPI(CSRFExemptAPIView):
+class NoticeAdminAPI(APIView):
     def post(self, request):
         """
         create notice
@@ -83,7 +82,7 @@ class NoticeAdminAPI(CSRFExemptAPIView):
         return Response({"error": error, "data": None})
 
 
-class CommentAdminAPI(CSRFExemptAPIView):
+class CommentAdminAPI(APIView):
     def put(self, request):
         """
         check a comment of notice

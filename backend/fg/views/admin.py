@@ -1,13 +1,10 @@
 from ..models import FG
 from ..serializers import (FGSerializer, FGFileUploadSerializer, CreateFGSerializer)
-from freshman.models import Freshman
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.db import transaction, IntegrityError
 from django.contrib.auth.hashers import make_password
-from fnet_api.csrf import CSRFExemptAPIView
 from openpyxl import load_workbook
 
 
@@ -66,7 +63,7 @@ class FGAPI(APIView):
         return Response({"error": False, "data": data})
     
 
-class FGFileUploadAPI(CSRFExemptAPIView):
+class FGFileUploadAPI(APIView):
     parser_classes = (MultiPartParser,)
 
     #TODO: 예외처리
